@@ -1,29 +1,28 @@
-import { Link, useParams } from "react-router-dom";
-import NewColor from "./NewColor";
+import { Link, useNavigate } from "react-router-dom";
+import colorData from "./colorData";
+import { useEffect } from "react";
 
 const Colors = () => {
-  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "white";
+  }, []);
 
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       <h2>Welcome to the color factory</h2>
 
-      <nav>
-        <Link to={`/colors/new`}>Add a color</Link>
-      </nav>
+      <Link>{navigate("/colors/new")}Add color</Link>
 
       <h3>Please select a color</h3>
+
       <nav>
-        <Link to={`/colors/${params.new}`}>{params.new}</Link>
-      </nav>
-      <nav>
-        <Link to={`/colors/red`}>red</Link>
-      </nav>
-      <nav>
-        <Link to={`/colors/green`}>green</Link>
-      </nav>
-      <nav>
-        <Link to={`/colors/blue`}>blue</Link>
+        {colorData.map((color) => (
+          <p>
+            <Link to={`/colors/${color}`}>{color}</Link>
+          </p>
+        ))}
       </nav>
     </div>
   );

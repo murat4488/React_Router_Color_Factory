@@ -1,20 +1,25 @@
-import { useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import colorData from "./colorData";
 
 const NewColor = () => {
-  const params = useParams();
-  let data;
+  const navigate = useNavigate();
+  const colors = useRef();
+
   const [colorName, setColorName] = useState("");
+
   const handleChange = (e) => {
-    setColorName(e.target.value);
-    data = e.target.value;
-    console.log(data);
+    colors.current = e.target.value;
+    setColorName(colors.current);
   };
+
+  useEffect(() => {}, [colorData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    return <Navigate to={`colors/`} />;
+    setColorName([colorData]);
+    colorData.unshift(colors.current);
+    navigate(`/colors}`);
   };
 
   return (

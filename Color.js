@@ -1,26 +1,30 @@
 import { Link, useParams } from "react-router-dom";
+import colorData from "./colorData";
+import { useEffect, useState } from "react";
 
 const Color = () => {
   const { color } = useParams();
+  const [backColor, setBackColor] = useState("white");
 
-  //const color2 = colors.find((color3) => color3 === color);
-  const color2 =
-    color === "red"
-      ? "red"
-      : color === "green"
-      ? "green"
-      : color === "blue"
-      ? "blue"
-      : false;
+  const colorBack = colorData.find((color3) => color3 === color);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = colorBack;
+  }, [backColor]);
 
   return (
-    <body className="color" style={{ backgroundColor: color2 }}>
+    <div
+      className="color"
+      style={{ backgroundColor: colorBack, color: "white" }}
+    >
       <div>
-        <h1>This is {color2}.</h1>
+        <h1>This is {colorBack}.</h1>
         <h1>Isn't it beatiful?</h1>
       </div>
-      <Link to={`/colors`}>Go back</Link>
-    </body>
+      <Link to={`/colors`} style={{ color: "white" }}>
+        Go back
+      </Link>
+    </div>
   );
 };
 export default Color;

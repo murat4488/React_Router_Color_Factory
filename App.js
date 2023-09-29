@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Colors from "./Colors";
 import Color from "./Color";
 import NewColor from "./NewColor";
